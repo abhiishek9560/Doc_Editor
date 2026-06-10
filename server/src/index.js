@@ -11,15 +11,19 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+// CORS must be FIRST
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    process.env.FRONTEND_URL || 'http://localhost:5173',
+    'https://doc-editor-roan.vercel.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.options('*', cors());
 
+// Then everything else
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
