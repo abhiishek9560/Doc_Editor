@@ -1,107 +1,77 @@
-# DocFlow - Collaborative Document Editor
+# DocFlow — Collaborative Document Editor
 
-A full-stack collaborative document editing platform built with React, Node.js/Express, and Supabase.
+A lightweight collaborative document editor built for the Ajaia AI-Native 
+Full Stack Developer Assessment.
 
-## Project Structure
+**Live Demo:** https://doc-editor-roan.vercel.app
 
-```
-ajaia-collab-editor/
-├── client/          (React + Vite + Tailwind CSS)
-├── server/          (Node.js + Express)
-└── README.md
-```
+**Test Credentials:**
+| User | Email | Password |
+|------|-------|----------|
+| Abhishek (Owner) | abhishek@ajaia.dev | Test@1234 |
+| Bob (Shared User) | bob@ajaia.dev | Test@1234 |
 
 ## Features
-
-- 🔐 User authentication with Supabase
-- 📝 Rich text editor with TipTap
-- 📤 Document upload and sharing
-- 🚀 Real-time collaboration capabilities
-- 🎨 Modern UI with Tailwind CSS
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 16+ and npm
-- Supabase account and project
-
-### Backend Setup
-
-```bash
-cd server
-npm install
-cp .env.example .env
-npm run dev
-```
-
-The server will run on http://localhost:5000
-
-### Frontend Setup
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-The client will run on http://localhost:5173
-
-## Environment Variables
-
-### Server (.env)
-- `SUPABASE_URL` - Your Supabase project URL
-- `SUPABASE_ANON_KEY` - Supabase anonymous key
-- `SUPABASE_SERVICE_ROLE_KEY` - Supabase service role key
-- `PORT` - Server port (default: 5000)
-
-### Client (.env)
-- `VITE_SUPABASE_URL` - Supabase project URL
-- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous key
-- `VITE_API_URL` - Backend API URL (http://localhost:5000)
+- Rich text document editing (Bold, Italic, Underline, Headings, Lists, Alignment)
+- Document creation, renaming, and deletion
+- File import (.txt, .md, .docx → editable documents)
+- Document sharing with view/edit permissions
+- Auto-save with 2 second debounce
+- Session persistence across page refreshes
+- Clean responsive UI
 
 ## Tech Stack
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, Vite, Tailwind CSS |
+| Rich Text Editor | Tiptap |
+| Backend | Node.js, Express |
+| Database + Auth | Supabase (PostgreSQL + Auth) |
+| File Parsing | mammoth (.docx), buffer (.txt/.md) |
+| State Management | Zustand |
+| HTTP Client | Axios |
+| Deployment | Vercel (frontend), Render (backend) |
 
-### Frontend
-- React 18
-- Vite
-- Tailwind CSS
-- TipTap (Rich Text Editor)
-- Zustand (State Management)
-- React Router
-- Axios
-- Lucide React (Icons)
+## Local Setup
 
-### Backend
-- Node.js + Express
-- Supabase
-- Multer (File uploads)
-- Mammoth (DOCX parsing)
-- Jest + Supertest (Testing)
+### Prerequisites
+- Node.js 18+
+- A Supabase project (free tier)
 
-## API Endpoints
+### 1. Clone the repository
+git clone https://github.com/abhiishek9560/Doc_Editor.git
+cd Doc_Editor
 
-### Authentication
-- `POST /api/auth/login` - User login
-- `POST /api/auth/signup` - User registration
-- `POST /api/auth/logout` - User logout
-- `GET /api/auth/me` - Get current user
+### 2. Backend setup
+cd server
+cp .env.example .env
+# Fill in your Supabase credentials in .env
+npm install
+node src/index.js
+# Server runs on http://localhost:5000
 
-### Documents
-- `GET /api/documents` - List user documents
-- `POST /api/documents` - Create new document
-- `GET /api/documents/:id` - Get document
-- `PUT /api/documents/:id` - Update document
-- `DELETE /api/documents/:id` - Delete document
+### 3. Frontend setup
+cd client
+cp .env.example .env
+# Fill in your Supabase credentials and API URL in .env
+npm install
+npm run dev
+# App runs on http://localhost:5173
 
-### Sharing
-- `POST /api/shares` - Share document
-- `GET /api/shares/:id` - Get share details
-- `DELETE /api/shares/:id` - Revoke share
+### 4. Database setup
+Run the SQL schema in your Supabase SQL Editor.
+Schema file: supabase-schema.sql (included in repo root)
 
-### Uploads
-- `POST /api/upload` - Upload file
+### 5. Run tests
+cd server
+npm test
 
-## License
+## Deployment
+- Frontend deployed on Vercel
+- Backend deployed on Render (free tier)
+- Database hosted on Supabase
 
-MIT
+## Known Limitations
+- .docx file import preserves plain text only (rich formatting stripped)
+- No real-time collaboration (single user editing at a time)
+- Free tier Render backend may have cold start delay (~30 seconds)
