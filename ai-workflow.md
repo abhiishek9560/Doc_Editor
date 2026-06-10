@@ -7,25 +7,25 @@
 
 ## Where AI Materially Sped Up My Work
 
-**Architecture planning (saved ~45 min)**
+**Architecture planning**
 Claude analyzed the full assessment requirements and produced a 
 complete phase-by-phase build plan with tech stack justification 
 before I wrote a single line of code. This prevented scope creep 
 and kept decisions deliberate.
 
-**Boilerplate elimination (saved ~60 min)**
+**Boilerplate elimination**
 Supabase schema with RLS policies, Express middleware, Zustand stores,
 Axios interceptors — all generated from precise prompts. These are 
 correct-by-construction patterns that would otherwise require 
 documentation lookups.
 
-**Debugging (saved ~30 min)**
+**Debugging**
 When login returned 404, Claude diagnosed the ES module/CommonJS 
 inconsistency immediately from the error description. When CORS 
 blocked the live deployment, Claude identified the middleware 
 ordering issue without needing to see the full file.
 
-**Documentation (saved ~30 min)**
+**Documentation**
 All README, architecture notes, and this AI workflow note drafted 
 by Claude with full technical accuracy.
 
