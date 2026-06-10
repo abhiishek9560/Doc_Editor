@@ -1,0 +1,7 @@
+Live Application: https://doc-editor-roan.vercel.app
+Backend API: https://docflow-server-mn7o.onrender.com
+GitHub Repository: https://github.com/abhiishek9560/Doc_Editor
+
+Test Credentials:
+Email: abhishek@ajaia.dev / Password: Test@1234 (Owner account)
+Email: bob@ajaia.dev / Password: Test@1234 (Shared recipient account)
