@@ -23,13 +23,25 @@ router.get('/', async (req, res) => {
       .select(`
         document_id,
         permission,
-        documents (id, title, created_at, updated_at, owner_id),
-        profiles (email)
+        documents (id, title, created_at, updated_at, owner_id)
       `)
       .eq('shared_with_id', userId)
       .order('created_at', { ascending: false })
 
     if (sharedError) throw sharedError
+
+    // Fetch owner profiles for shared documents
+    const ownerIds = [...new Set(sharedDocs.map(s => s.documents?.owner_id).filter(Boolean))]
+    let ownerProfiles = {}
+    if (ownerIds.length > 0) {
+      const { data: profiles } = await supabaseAdmin
+        .from('profiles')
+        .select('id, email')
+        .in('id', ownerIds)
+      if (profiles) {
+        profiles.forEach(p => { ownerProfiles[p.id] = p.email })
+      }
+    }
 
     // Transform shared documents
     const shared = sharedDocs
@@ -40,7 +52,7 @@ router.get('/', async (req, res) => {
         updated_at: share.documents.updated_at,
         owner_id: share.documents.owner_id,
         permission: share.permission,
-        owner_email: share.profiles?.email || 'Unknown',
+        owner_email: ownerProfiles[share.documents.owner_id] || 'Unknown',
       }))
       .filter((doc) => doc.id) // Remove invalid entries
 
